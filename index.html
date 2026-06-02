@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العوضي للتجارة والاستيراد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #c9a227;
+            --accent-light: #e8d5a3;
+            --text: #f5f5f5;
+            --text-muted: #b8b8b8;
+            --card-bg: #242442;
+            --border: rgba(201, 162, 39, 0.2);
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== الشريط الإعلاني ===== */
+        .promo-bar {
+            background: linear-gradient(90deg, var(--accent), #d4af37, var(--accent));
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+            color: var(--primary);
+            padding: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1000;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .promo-bar .highlight {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin: 0 5px;
+        }
+
+        .promo-close {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .promo-close:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* ===== الهيدر ===== */
+        header {
+            background: var(--secondary);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dark-mode-btn, .admin-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark-mode-btn:hover, .admin-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* ===== القسم الرئيسي ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .hero-feature i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* ===== المنتجات ===== */
+        .products-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.15);
+            border-color: var(--accent);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .price-value {
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .price-unit {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* ===== الفوتر ===== */
+        footer {
+            background: var(--secondary);
+            border-top: 2px solid var(--accent);
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .visitor-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .visitor-count i {
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ===== زر واتساب ثابت ===== */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 998;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* ===== زر العودة للأعلى ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 997;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(201, 162, 39, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ===== نموذج تسجيل الدخول ===== */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .login-overlay.active {
+            display: flex;
+        }
+
+        .login-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--accent);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: var(--primary);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .login-error {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        /* ===== لوحة التحكم ===== */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            background: var(--secondary);
+            padding: 20px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .admin-header h2 {
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-btn-small {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn-save {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-close-admin {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-export {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .admin-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .admin-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .admin-section h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-edit-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 2fr auto auto;
+            gap: 10px;
+            align-items: center;
+            padding: 15px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-edit-row input {
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .product-edit-row input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-add-product {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .promo-edit {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .promo-edit input {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--primary);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--text-muted);
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .toggle-slider:before {
+            content: "";
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--success);
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        .save-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--success);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            z-index: 10001;
+            transition: transform 0.5s;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .save-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== الوضع النهاري ===== */
+        body.light-mode {
+            --primary: #f5f5f5;
+            --secondary: #e8e8e8;
+            --text: #1a1a2e;
+            --text-muted: #666;
+            --card-bg: #ffffff;
+            --border: rgba(201, 162, 39, 0.3);
+        }
+
+        body.light-mode .hero {
+            background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+        }
+
+        /* ===== ريسبونسيف ===== */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 1.8rem; }
+            .product-edit-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            .product-edit-row input:nth-child(3),
+            .product-edit-row input:nth-child(4) {
+                grid-column: 1 / -1;
+            }
+            .promo-edit {
+                grid-template-columns: 1fr;
+            }
+            .header-actions {
+                gap: 8px;
+            }
+            .dark-mode-btn span, .admin-btn span {
+                display: none;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- الشريط الإعلاني -->
+    <div class="promo-bar" id="promoBar">
+        <span id="promoText">عرض خاص لفترة محدودة! سوست روز 5 ملي - 100 ياردة بـ <span class="highlight">200 جنيه فقط</span></span>
+        <button class="promo-close" onclick="closePromo()">×</button>
+    </div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23c9a227'/%3E%3Cpath d='M30 65 Q50 20 70 65' stroke='%231a1a2e' stroke-width='4' fill='none'/%3E%3Ccircle cx='50' cy='45' r='8' fill='%231a1a2e'/%3E%3Cpath d='M35 55 L30 75 L40 70 L50 75 L60 70 L70 75 L65 55' fill='%231a1a2e'/%3E%3C/svg%3E" alt="شعار العوضي" class="logo-img">
+                <div class="logo-text">
+                    <h1>العوضي</h1>
+                    <p>للتجارة والاستيراد</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="dark-mode-btn" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon" id="darkIcon"></i>
+                    <span id="darkText">الوضع الليلي</span>
+                </button>
+                <button class="admin-btn" onclick="showLogin()">
+                    <i class="fas fa-lock"></i>
+                    <span>الإدارة</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>جودة عالية - أسعار تنافسية</h2>
+            <p>نقدم لكم أفضل منتجات البلاستيك والسوست بأعلى جودة وأفضل سعر في السوق</p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>جودة ممتازة</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-tag"></i>
+                    <span>أسعار تنافسية</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-truck"></i>
+                    <span>توصيل سريع</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-headset"></i>
+                    <span>دعم ممتاز</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المنتجات -->
+    <section class="products-section">
+        <div class="section-title">
+            <h2>منتجاتنا</h2>
+            <p>تصفح منتجاتنا المتنوعة بأفضل الأسعار</p>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <!-- يُملأ بالجافاسكريبت -->
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-building"></i> عن الشركة</h3>
+                <p>العوضي للتجارة والاستيراد - نوفر أفضل منتجات البلاستيك والسوست بجودة عالية وأسعار تنافسية</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-phone"></i> تواصل معنا</h3>
+                <a href="https://wa.me/201026174801" target="_blank"><i class="fab fa-whatsapp"></i> واتساب: +20 102 617 4801</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> مصر</a>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-clock"></i> مواعيد العمل</h3>
+                <p>السبت - الخميس: 9 صباحاً - 9 مساءً</p>
+                <p>الجمعة: إجازة</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2026 العوضي للتجارة والاستيراد</p>
+            <div class="visitor-count">
+                <i class="fas fa-eye"></i>
+                <span>عدد الزوار: <strong id="visitorCount">0</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر واتساب ثابت -->
+    <a href="https://wa.me/201026174801" class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- نموذج تسجيل الدخول -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <i class="fas fa-lock" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
+            <h2>لوحة التحكم</h2>
+            <p>أدخل كلمة المرور للدخول إلى لوحة الإدارة</p>
+            <input type="password" class="login-input" id="loginPassword" placeholder="••••••" onkeypress="if(event.key==='Enter')doLogin()">
+            <div class="login-error" id="loginError">كلمة المرور غير صحيحة!</div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="doLogin()">
+                <i class="fas fa-sign-in-alt"></i> دخول
+            </button>
+            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="hideLogin()">
+                <i class="fas fa-times"></i> إلغاء
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2><i class="fas fa-cog"></i> لوحة تحكم العوضي</h2>
+            <div class="admin-actions">
+                <button class="admin-btn-small btn-export" onclick="exportData()">
+                    <i class="fas fa-download"></i> تصدير
+                </button>
+                <button class="admin-btn-small btn-save" onclick="saveAllChanges()">
+                    <i class="fas fa-save"></i> حفظ التغييرات
+                </button>
+                <button class="admin-btn-small btn-close-admin" onclick="closeAdmin()">
+                    <i class="fas fa-times"></i> خروج
+                </button>
+            </div>
+        </div>
+        <div class="admin-content">
+            <!-- إدارة المنتجات -->
+            <div class="admin-section">
+                <h3><i class="fas fa-boxes"></i> إدارة المنتجات</h3>
+                <div id="adminProductsList"></div>
+                <button class="btn-add-product" onclick="addNewProduct()">
+                    <i class="fas fa-plus"></i> إضافة منتج جديد
+                </button>
+            </div>
+
+            <!-- إدارة العروض -->
+            <div class="admin-section">
+                <h3><i class="fas fa-percent"></i> إدارة العروض</h3>
+                <div class="promo-edit">
+                    <input type="text" id="promoTextInput" placeholder="نص العرض">
+                    <input type="text" id="promoHighlightInput" placeholder="الجزء المميز">
+                    <input type="text" id="promoPriceInput" placeholder="السعر المميز">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="promoToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- إدارة التواصل -->
+            <div class="admin-section">
+                <h3><i class="fas fa-address-card"></i> بيانات التواصل</h3>
+                <div style="display: grid; gap: 10px;">
+                    <input type="text" id="whatsappNumber" placeholder="رقم الواتساب (مثال: 201026174801)">
+                    <input type="text" id="companyLocation" placeholder="الموقع">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إشعار الحفظ -->
+    <div class="save-notification" id="saveNotification">
+        <i class="fas fa-check-circle"></i> تم حفظ التغييرات بنجاح!
+    </div>
+
+    <script>
+        // ==================== البيانات ====================
+        let siteData = {
+            products: [
+                {
+                    id: 1,
+                    name: "بلاستيك شفاف PVC",
+                    price: "96",
+                    unit: "جنيه / كيلو",
+                    desc: "خامة PVC شفافة مبردة وسوبر كلير - متوفر جميع التخانات - عرض 150 سم",
+                    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop",
+                    badge: "الأكثر مبيعاً"
+                },
+                {
+                    id: 2,
+                    name: "سوست ألوان 5 م",
+                    price: "115",
+                    unit: "جنيه / الرول",
+                    desc: "سوست جميع الألوان - 100 ياردة - جودة عالية",
+                    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop",
+                    badge: null
+                },
+                {
+                    id: 3,
+                    name: "سوست 5 م أسود",
+                    price: "185",
+                    unit: "جنيه / الرول",
+                    desc: "سوست 5 متر أسود - 100 ياردة - متين وعالي الجودة",
+                    image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&h=300&fit=crop",
+                    badge: null
+                }
+            ],
+            promo: {
+                text: "عرض خاص لفترة محدودة! سوست روز 5 ملي - 100 ياردة بـ",
+                highlight: "200 جنيه فقط",
+                active: true
+            },
+            contact: {
+                whatsapp: "201026174801",
+                location: "مصر"
+            }
+        };
+
+        // كلمة المرور
+        const ADMIN_PASSWORD = "elawdy2026";
+
+        // ==================== تحميل البيانات المحفوظة ====================
+        function loadData() {
+            const saved = localStorage.getItem('alAwadyData');
+            if (saved) {
+                siteData = JSON.parse(saved);
+            }
+        }
+
+        // ==================== عرض المنتجات ====================
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = siteData.products.map(p => `
+                <div class="product-card" data-id="${p.id}">
+                    ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+                    <img src="${p.image}" alt="${p.name}" class="product-image" onerror="this.src='https://via.placeholder.com/400x300/c9a227/1a1a2e?text=${encodeURIComponent(p.name)}'">
+                    <div class="product-info">
+                        <h3 class="product-name">${p.name}</h3>
+                        <p class="product-desc">${p.desc}</p>
+                        <div class="product-price">
+                            <span class="price-value">${p.price}</span>
+                            <span class="price-unit">${p.unit}</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="https://wa.me/${siteData.contact.whatsapp}?text=مرحباً، أريد الاستفسار عن منتج: ${encodeURIComponent(p.name)}" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-whatsapp"></i> طلب المنتج
+                            </a>
+                            <button class="btn btn-secondary" onclick="shareProduct('${p.name}', '${p.price}', '${p.unit}')">
+                                <i class="fas fa-share-alt"></i> مشاركة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==================== الشريط الإعلاني ====================
+        function renderPromo() {
+            const bar = document.getElementById('promoBar');
+            const text = document.getElementById('promoText');
+            if (siteData.promo.active) {
+                bar.style.display = 'block';
+                text.innerHTML = `${siteData.promo.text} <span class="highlight">${siteData.promo.highlight}</span>`;
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        function closePromo() {
+            document.getElementById('promoBar').style.display = 'none';
+            localStorage.setItem('promoClosed', 'true');
+        }
+
+        // ==================== عداد الزوار ====================
+        function updateVisitorCount() {
+            let count = parseInt(localStorage.getItem('visitorCount') || '0');
+            if (!sessionStorage.getItem('visited')) {
+                count++;
+                localStorage.setItem('visitorCount', count);
+                sessionStorage.setItem('visited', 'true');
+            }
+            document.getElementById('visitorCount').textContent = count.toLocaleString('ar-EG');
+        }
+
+        // ==================== الوضع الليلي ====================
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('darkMode', isLight ? 'light' : 'dark');
+
+            const icon = document.getElementById('darkIcon');
+            const text = document.getElementById('darkText');
+            if (isLight) {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'الوضع النهاري';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'الوضع الليلي';
+            }
+        }
+
+        // ==================== مشاركة المنتج ====================
+        function shareProduct(name, price, unit) {
+            const text = `منتج: ${name}
+السعر: ${price} ${unit}
+
+للطلب: https://wa.me/${siteData.contact.whatsapp}`;
+            if (navigator.share) {
+                navigator.share({ title: name, text: text });
+            } else {
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            }
+        }
+
+        // ==================== زر العودة للأعلى ====================
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== تسجيل الدخول ====================
+        function showLogin() {
+            document.getElementById('loginOverlay').classList.add('active');
+            document.getElementById('loginPassword').focus();
+        }
+
+        function hideLogin() {
+            document.getElementById('loginOverlay').classList.remove('active');
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').classList.remove('show');
+        }
+
+        function doLogin() {
+            const pass = document.getElementById('loginPassword').value;
+            if (pass === ADMIN_PASSWORD) {
+                hideLogin();
+                openAdmin();
+            } else {
+                document.getElementById('loginError').classList.add('show');
+                document.getElementById('loginPassword').value = '';
+            }
+        }
+
+        // ==================== لوحة التحكم ====================
+        function openAdmin() {
+            document.getElementById('adminPanel').classList.add('active');
+            renderAdminProducts();
+            document.getElementById('promoTextInput').value = siteData.promo.text;
+            document.getElementById('promoHighlightInput').value = siteData.promo.highlight;
+            document.getElementById('promoPriceInput').value = siteData.promo.highlight;
+            document.getElementById('promoToggle').checked = siteData.promo.active;
+            document.getElementById('whatsappNumber').value = siteData.contact.whatsapp;
+            document.getElementById('companyLocation').value = siteData.contact.location;
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        function renderAdminProducts() {
+            const list = document.getElementById('adminProductsList');
+            list.innerHTML = siteData.products.map((p, index) => `
+                <div class="product-edit-row" data-index="${index}">
+                    <input type="text" value="${p.name}" placeholder="اسم المنتج" class="p-name">
+                    <input type="text" value="${p.price}" placeholder="السعر" class="p-price">
+                    <input type="text" value="${p.unit}" placeholder="الوحدة" class="p-unit">
+                    <input type="text" value="${p.desc}" placeholder="الوصف" class="p-desc">
+                    <input type="text" value="${p.image}" placeholder="رابط الصورة" class="p-image" style="display:none;">
+                    <button class="btn-delete" onclick="deleteProduct(${index})" title="حذف">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addNewProduct() {
+            const newId = Math.max(...siteData.products.map(p => p.id), 0) + 1;
+            siteData.products.push({
+                id: newId,
+                name: "منتج جديد",
+                price: "0",
+                unit: "جنيه",
+                desc: "وصف المنتج",
+                image: "https://via.placeholder.com/400x300/c9a227/1a1a2e?text=منتج+جديد",
+                badge: null
+            });
+            renderAdminProducts();
+            showNotification('تم إضافة منتج جديد');
+        }
+
+        function deleteProduct(index) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                siteData.products.splice(index, 1);
+                renderAdminProducts();
+                showNotification('تم حذف المنتج');
+            }
+        }
+
+        function saveAllChanges() {
+            // حفظ المنتجات
+            const rows = document.querySelectorAll('.product-edit-row');
+            rows.forEach((row, index) => {
+                if (siteData.products[index]) {
+                    siteData.products[index].name = row.querySelector('.p-name').value;
+                    siteData.products[index].price = row.querySelector('.p-price').value;
+                    siteData.products[index].unit = row.querySelector('.p-unit').value;
+                    siteData.products[index].desc = row.querySelector('.p-desc').value;
+                }
+            });
+
+            // حفظ العرض
+            siteData.promo.text = document.getElementById('promoTextInput').value;
+            siteData.promo.highlight = document.getElementById('promoHighlightInput').value;
+            siteData.promo.active = document.getElementById('promoToggle').checked;
+
+            // حفظ التواصل
+            siteData.contact.whatsapp = document.getElementById('whatsappNumber').value;
+            siteData.contact.location = document.getElementById('companyLocation').value;
+
+            // حفظ في localStorage
+            localStorage.setItem('alAwadyData', JSON.stringify(siteData));
+
+            // تحديث العرض
+            renderProducts();
+            renderPromo();
+
+            showNotification('تم حفظ التغييرات بنجاح!');
+        }
+
+        function showNotification(msg) {
+            const notif = document.getElementById('saveNotification');
+            notif.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 3000);
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(siteData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'al-awady-data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotification('تم تصدير البيانات');
+        }
+
+        // ==================== التهيئة ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            renderProducts();
+            renderPromo();
+            updateVisitorCount();
+
+            // تحميل الوضع المحفوظ
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('darkIcon').className = 'fas fa-sun';
+                document.getElementById('darkText').textContent = 'الوضع النهاري';
+            }
+
+            // التحقق من إغلاق العرض
+            if (localStorage.getItem('promoClosed') === 'true') {
+                document.getElementById('promoBar').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
