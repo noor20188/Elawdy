@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - العوضي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #c9a96e;
+            --accent-light: #e8d5a3;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --bg: #f4f6f9;
+            --card: #ffffff;
+            --text: #2c2c2c;
+            --text-light: #666;
+            --border: #e0d5c5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .admin-header h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .admin-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-header .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.blue { background: #e3f2fd; color: #1976d2; }
+        .stat-icon.green { background: #e8f5e9; color: #388e3c; }
+        .stat-icon.orange { background: #fff3e0; color: #f57c00; }
+        .stat-icon.red { background: #ffebee; color: #d32f2f; }
+
+        .stat-info h3 {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .stat-info p {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content { grid-template-columns: 1fr; }
+        }
+
+        /* Card */
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .card-header i {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: var(--primary);
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+        }
+
+        /* Product List */
+        .product-item {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .product-item:hover {
+            border-color: var(--accent);
+        }
+
+        .product-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .product-item h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .product-item .price {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .product-item .old-price {
+            text-decoration: line-through;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Promo Section */
+        .promo-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .promo-status.active {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .promo-status.inactive {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Alert */
+        .alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            border-radius: 12px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            z-index: 9999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .alert.show {
+            display: flex;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #388e3c;
+            border: 2px solid #388e3c;
+        }
+
+        .alert-danger {
+            background: #ffebee;
+            color: #d32f2f;
+            border: 2px solid #d32f2f;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-100%); }
+            to { transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Export Section */
+        .export-section {
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .export-section h2 {
+            margin-bottom: 15px;
+        }
+
+        .export-section p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Preview Link */
+        .preview-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .preview-link:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-header h1 { font-size: 1.2rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stat-info p { font-size: 1.4rem; }
+            .product-actions { flex-wrap: wrap; }
+            .header-actions { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="logo">
+            <i class="fas fa-cog"></i>
+            <h1>لوحة التحكم - العوضي</h1>
+        </div>
+        <div class="header-actions">
+            <a href="https://elawdy-sxpk.vercel.app/" target="_blank" class="preview-link" style="padding: 8px 20px; font-size: 0.9rem;">
+                <i class="fas fa-external-link-alt"></i>
+                عرض الموقع
+            </a>
+            <button class="btn btn-danger btn-sm" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                خروج
+            </button>
+        </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon blue">
+                <i class="fas fa-box"></i>
+            </div>
+            <div class="stat-info">
+                <h3>عدد المنتجات</h3>
+                <p id="productCount">4</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon green">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="stat-info">
+                <h3>العروض النشطة</h3>
+                <p id="promoCount">1</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon orange">
+                <i class="fas fa-eye"></i>
+            </div>
+            <div class="stat-info">
+                <h3>عدد الزوار</h3>
+                <p id="visitorCount">...</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon red">
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="stat-info">
+                <h3>آخر تحديث</h3>
+                <p id="lastUpdate">الآن</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Products Management -->
+        <div class="left-column">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-boxes"></i> إدارة المنتجات</h2>
+                    <button class="btn btn-success btn-sm" onclick="addNewProduct()">
+                        <i class="fas fa-plus"></i> منتج جديد
+                    </button>
+                </div>
+
+                <div id="productsList">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Add/Edit Product Form -->
+            <div class="card" id="productForm" style="display: none;">
+                <div class="card-header">
+                    <h2><i class="fas fa-edit"></i> تعديل منتج</h2>
+                </div>
+
+                <form id="editForm">
+                    <input type="hidden" id="editId">
+
+                    <div class="form-group">
+                        <label>اسم المنتج</label>
+                        <input type="text" id="editName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر</label>
+                        <input type="number" id="editPrice" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الوحدة</label>
+                        <input type="text" id="editUnit" placeholder="مثال: جنيه / كيلو" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الوسم</label>
+                        <input type="text" id="editTag" placeholder="مثال: متوفر بجميع التخانات">
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر القديم (للعرض المشطوب)</label>
+                        <input type="number" id="editOldPrice" placeholder="اتركه فارغاً إذا لا يوجد">
+                    </div>
+
+                    <div class="form-group">
+                        <label>التفاصيل (كل سطر تفصيل)</label>
+                        <textarea id="editDetails" placeholder="خامة P.V.C شفافة
+عرض 150 سم
+..." required></textarea>
+                    </div>
+
+                    <div class="product-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> حفظ التغييرات
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="cancelEdit()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Promo & Settings -->
+        <div class="right-column">
+            <!-- Promo Management -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-fire"></i> إدارة العروض</h2>
+                    <span class="promo-status active" id="promoStatus">نشط</span>
+                </div>
+
+                <div class="form-group">
+                    <label>تفعيل/إلغاء العرض</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="promoToggle" checked onchange="togglePromo()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div id="promoForm">
+                    <div class="form-group">
+                        <label>نص العرض</label>
+                        <input type="text" id="promoText" value="عرض خاص لفترة محدودة! سوست روز 5 ملي - 100 ياردة بـ">
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر الجديد</label>
+                        <input type="number" id="promoPrice" value="200">
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر القديم</label>
+                        <input type="number" id="promoOldPrice" value="250">
+                    </div>
+
+                    <div class="form-group">
+                        <label>الوحدة</label>
+                        <input type="text" id="promoUnit" value="جنيه فقط">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="savePromo()">
+                        <i class="fas fa-save"></i> حفظ العرض
+                    </button>
+                </div>
+            </div>
+
+            <!-- Export -->
+            <div class="export-section">
+                <h2><i class="fas fa-download"></i> تصدير الموقع</h2>
+                <p>قم بتصدير ملف HTML جديد لرفعه على الموقع</p>
+                <button class="btn btn-success" onclick="exportWebsite()">
+                    <i class="fas fa-file-export"></i> تصدير الموقع الجديد
+                </button>
+            </div>
+
+            <!-- Instructions -->
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <h2><i class="fas fa-info-circle"></i> كيفية الاستخدام</h2>
+                </div>
+                <ol style="padding-right: 20px; line-height: 2;">
+                    <li>اضغط "تعديل" على أي منتج لتغيير السعر</li>
+                    <li>اضغط "حفظ التغييرات" بعد التعديل</li>
+                    <li>عدّل العرض من قسم "إدارة العروض"</li>
+                    <li>اضغط "تصدير الموقع" في النهاية</li>
+                    <li>ارفع الملف المصدر على GitHub</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert alert-success" id="successAlert">
+        <i class="fas fa-check-circle"></i>
+        <span id="alertMessage">تم الحفظ بنجاح!</span>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // ║  SECURITY - حماية الصفحة                                    ║
+        // ═══════════════════════════════════════════════════════════════
+
+        // Check if logged in
+        if (localStorage.getItem('admin_logged_in') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // ║  DATA - البيانات                                            ║
+        // ═══════════════════════════════════════════════════════════════
+
+        let products = JSON.parse(localStorage.getItem('admin_products')) || [
+            {
+                id: 1,
+                name: "بلاستيك شفاف PVC",
+                price: 96,
+                unit: "جنيه / كيلو",
+                tag: "متوفر بجميع التخانات",
+                old_price: null,
+                details: ["خامة P.V.C شفافة مبدره", "سوبر كلير عالي الجودة", "عرض 150 سم", "متوفر جميع التخانات", "مقاوم للماء والرطوبة"]
+            },
+            {
+                id: 2,
+                name: "سوست ألوان 5 م",
+                price: 115,
+                unit: "جنيه / الرول",
+                tag: "جميع الألوان",
+                old_price: null,
+                details: ["سوست جميع الألوان", "طول 100 ياردة للرول", "مقاس 5 متر", "جودة عالية وممتازة", "مناسب لجميع الاستخدامات"]
+            },
+            {
+                id: 3,
+                name: "سوست 5 م أسود",
+                price: 185,
+                unit: "جنيه / الرول",
+                tag: "كلاسيكي",
+                old_price: null,
+                details: ["سوست أسود كلاسيكي", "طول 100 ياردة للرول", "مقاس 5 متر", "جودة ممتازة ومتانة عالية", "مناسب للملابس والحقائب"]
+            },
+            {
+                id: 4,
+                name: "سوست روز 5 ملي",
+                price: 200,
+                unit: "جنيه / الرول",
+                tag: "عرض خاص 🔥",
+                old_price: 250,
+                details: ["سوست روز مميز", "طول 100 ياردة للرول", "مقاس 5 ملي", "جودة عالية", "عرض لفترة محدودة"]
+            }
+        ];
+
+        let promo = JSON.parse(localStorage.getItem('admin_promo')) || {
+            active: true,
+            text: "عرض خاص لفترة محدودة! سوست روز 5 ملي - 100 ياردة بـ",
+            price: 200,
+            old_price: 250,
+            unit: "جنيه فقط"
+        };
+
+        // ═══════════════════════════════════════════════════════════════
+        // ║  FUNCTIONS - الوظائف                                        ║
+        // ═══════════════════════════════════════════════════════════════
+
+        function logout() {
+            localStorage.removeItem('admin_logged_in');
+            window.location.href = 'admin-login.html';
+        }
+
+        function saveData() {
+            localStorage.setItem('admin_products', JSON.stringify(products));
+            localStorage.setItem('admin_promo', JSON.stringify(promo));
+        }
+
+        function loadProducts() {
+            const list = document.getElementById('productsList');
+            list.innerHTML = '';
+
+            products.forEach(product => {
+                const oldPriceHtml = product.old_price ? 
+                    `<span class="old-price">${product.old_price} جنيه</span>` : '';
+
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                item.innerHTML = `
+                    <div class="product-item-header">
+                        <h3>${product.name}</h3>
+                        <div>
+                            <span class="price">${product.price} ${product.unit}</span>
+                            ${oldPriceHtml}
+                        </div>
+                    </div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">
+                        <i class="fas fa-tag" style="color: var(--accent);"></i> ${product.tag}
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary btn-sm" onclick="editProduct(${product.id})">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+
+            document.getElementById('productCount').textContent = products.length;
+        }
+
+        function editProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('editId').value = product.id;
+            document.getElementById('editName').value = product.name;
+            document.getElementById('editPrice').value = product.price;
+            document.getElementById('editUnit').value = product.unit;
+            document.getElementById('editTag').value = product.tag;
+            document.getElementById('editOldPrice').value = product.old_price || '';
+            document.getElementById('editDetails').value = product.details.join('\n');
+
+            document.getElementById('productForm').style.display = 'block';
+            document.getElementById('productForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const id = parseInt(document.getElementById('editId').value);
+            const product = products.find(p => p.id === id);
+
+            if (product) {
+                product.name = document.getElementById('editName').value;
+                product.price = parseInt(document.getElementById('editPrice').value);
+                product.unit = document.getElementById('editUnit').value;
+                product.tag = document.getElementById('editTag').value;
+                product.old_price = document.getElementById('editOldPrice').value ? 
+                    parseInt(document.getElementById('editOldPrice').value) : null;
+                product.details = document.getElementById('editDetails').value.split('\n').filter(d => d.trim());
+
+                saveData();
+                loadProducts();
+                cancelEdit();
+                showAlert('تم حفظ التغييرات بنجاح!');
+                updateLastUpdate();
+            }
+        });
+
+        function cancelEdit() {
+            document.getElementById('productForm').style.display = 'none';
+            document.getElementById('editForm').reset();
+        }
+
+        function deleteProduct(id) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                products = products.filter(p => p.id !== id);
+                saveData();
+                loadProducts();
+                showAlert('تم حذف المنتج!');
+                updateLastUpdate();
+            }
+        }
+
+        function addNewProduct() {
+            const newId = Math.max(...products.map(p => p.id), 0) + 1;
+            products.push({
+                id: newId,
+                name: "منتج جديد",
+                price: 0,
+                unit: "جنيه",
+                tag: "جديد",
+                old_price: null,
+                details: ["تفصيل 1", "تفصيل 2"]
+            });
+            saveData();
+            loadProducts();
+            editProduct(newId);
+            showAlert('تم إضافة منتج جديد! قم بتعديله الآن');
+        }
+
+        function togglePromo() {
+            promo.active = document.getElementById('promoToggle').checked;
+            document.getElementById('promoStatus').textContent = promo.active ? 'نشط' : 'غير نشط';
+            document.getElementById('promoStatus').className = promo.active ? 'promo-status active' : 'promo-status inactive';
+            document.getElementById('promoForm').style.display = promo.active ? 'block' : 'none';
+            document.getElementById('promoCount').textContent = promo.active ? '1' : '0';
+            saveData();
+        }
+
+        function savePromo() {
+            promo.text = document.getElementById('promoText').value;
+            promo.price = parseInt(document.getElementById('promoPrice').value);
+            promo.old_price = parseInt(document.getElementById('promoOldPrice').value);
+            promo.unit = document.getElementById('promoUnit').value;
+
+            saveData();
+            showAlert('تم حفظ العرض بنجاح!');
+            updateLastUpdate();
+        }
+
+        function exportWebsite() {
+            const data = {
+                products: products,
+                promo: promo,
+                exportDate: new Date().toISOString()
+            };
+
+            const jsonContent = JSON.stringify(data, null, 2);
+
+            const blob = new Blob([jsonContent], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'website-data-' + new Date().getTime() + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showAlert('تم تصدير البيانات! أرسل الملف لتحديث الموقع');
+        }
+
+        function showAlert(message) {
+            document.getElementById('alertMessage').textContent = message;
+            const alert = document.getElementById('successAlert');
+            alert.classList.add('show');
+            setTimeout(() => alert.classList.remove('show'), 3000);
+        }
+
+        function updateLastUpdate() {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = 
+                now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        async function loadVisitorCount() {
+            try {
+                const response = await fetch('https://api.countapi.xyz/get/elawdy-website/visits');
+                const data = await response.json();
+                document.getElementById('visitorCount').textContent = data.value.toLocaleString('ar-EG');
+            } catch (error) {
+                document.getElementById('visitorCount').textContent = '---';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved promo settings
+            document.getElementById('promoToggle').checked = promo.active;
+            document.getElementById('promoText').value = promo.text;
+            document.getElementById('promoPrice').value = promo.price;
+            document.getElementById('promoOldPrice').value = promo.old_price;
+            document.getElementById('promoUnit').value = promo.unit;
+
+            togglePromo(); // Update UI
+            loadProducts();
+            loadVisitorCount();
+            updateLastUpdate();
+        });
+    </script>
+</body>
+</html>
